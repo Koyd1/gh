@@ -1,0 +1,23 @@
+# Кампания: {{ project_title }}
+
+## Бриф
+{{ brief }}
+
+## Итоговый план
+{{ plan_markdown }}
+
+## ICP
+{{ icp_markdown }}
+
+## Концепции
+{{ concepts_markdown }}
+
+## Копирайтинг
+{{ copy_markdown }}
+
+## Чек-лист внедрения
+{% for item in todo_items %}- [{{ 'x' if item.done else ' ' }}] {{ item.text }}
+{% endfor %}
+
+---
+Сгенерировано {{ timestamp }}.

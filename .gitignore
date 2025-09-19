@@ -1,0 +1,28 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python packaging
+*.egg-info/
+*.egg
+
+# Environment & configuration
+.env
+.env.*
+
+# Application artifacts
+artifacts/
+
+# Logs
+*.log
+
+# Streamlit cache and state
+.streamlit/
+
+# OS metadata
+.DS_Store
