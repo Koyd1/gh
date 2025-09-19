@@ -37,7 +37,16 @@ def _get_setting(key: str, default: Optional[str] = None) -> Optional[str]:
 
 
 def _resolve_backend() -> str:
-    return (_get_setting("LLM_BACKEND", "ollama") or "ollama").lower()
+    backend = _get_setting("LLM_BACKEND")
+    if backend:
+        return backend.lower()
+
+    # Автоматически переключаемся на облачный бэкенд, если есть ключи.
+    if _get_setting("GEMINI_API_KEY"):
+        return "gemini"
+    if _get_setting("OPENAI_API_KEY"):
+        return "openai"
+    return "ollama"
 
 
 def _resolve_default_model() -> str:
@@ -48,8 +57,19 @@ def _resolve_base_url() -> str:
     return _get_setting("OLLAMA_BASE_URL", "http://localhost:11434") or "http://localhost:11434"
 
 
+def _resolve_timeout() -> float:
+    timeout_setting = _get_setting("OLLAMA_TIMEOUT")
+    if timeout_setting:
+        try:
+            return float(timeout_setting)
+        except ValueError:
+            pass
+    return 180.0
+
+
 DEFAULT_MODEL = _resolve_default_model()
 DEFAULT_BASE_URL = _resolve_base_url()
+DEFAULT_TIMEOUT = _resolve_timeout()
 
 
 # 🔹 Ollama (локально)
@@ -65,7 +85,7 @@ def ollama_chat(
         "options": {"temperature": temperature},
     }
     try:
-        resp = requests.post(f"{base_url}/api/chat", json=payload, timeout=60)
+        resp = requests.post(f"{base_url}/api/chat", json=payload, timeout=DEFAULT_TIMEOUT)
         resp.raise_for_status()
         data = resp.json()
         content = (data.get("message") or {}).get("content", "")

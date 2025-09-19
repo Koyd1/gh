@@ -12,6 +12,10 @@ from agents._llm import DEFAULT_MODEL
 from graph import CampaignState, prepare_initial_state, run_campaign
 from memory import rag
 
+# import os
+# os.environ["LLM_BACKEND"] = "gemini"
+
+
 st.set_page_config(page_title="AI Orchestrator", layout="wide")
 st.title("AI Orchestrator — маркетинговый мини-стартап")
 
