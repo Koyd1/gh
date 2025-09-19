@@ -4,7 +4,7 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any, Dict
 
-from agents._llm import DEFAULT_MODEL, ollama_chat
+from agents._llm import DEFAULT_MODEL, chat
 from memory.rag import get_context, save_artifact
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,7 +17,7 @@ def icp(state: Dict[str, Any]) -> Dict[str, Any]:
     model: str = state.get("model", DEFAULT_MODEL)
 
     context = get_context(run_id, query=brief, k=5)
-    response = ollama_chat(
+    response = chat(
         [
             {"role": "system", "content": PROMPT_TEXT},
             {

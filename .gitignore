@@ -22,7 +22,9 @@ artifacts/
 *.log
 
 # Streamlit cache and state
-.streamlit/
+.streamlit/*
+!.streamlit
+!.streamlit/secrets.example.toml
 
 # OS metadata
 .DS_Store

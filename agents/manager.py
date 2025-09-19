@@ -7,7 +7,7 @@ from typing import Any, Dict, List
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from agents._llm import DEFAULT_MODEL, ollama_chat
+from agents._llm import DEFAULT_MODEL, chat
 from memory.rag import get_context, save_artifact
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,7 +32,7 @@ def plan(state: Dict[str, Any]) -> Dict[str, Any]:
     model: str = state.get("model", DEFAULT_MODEL)
 
     context = get_context(run_id, k=5)
-    plan_markdown = ollama_chat(
+    plan_markdown = chat(
         [
             {"role": "system", "content": PROMPT_TEXT},
             {
@@ -103,7 +103,7 @@ def assemble(state: Dict[str, Any]) -> Dict[str, Any]:
     plan_md = state.get("plan", "")
     brief = state["brief"]
 
-    validation_prompt = ollama_chat(
+    validation_prompt = chat(
         [
             {"role": "system", "content": PROMPT_TEXT},
             {

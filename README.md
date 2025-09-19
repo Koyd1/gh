@@ -25,6 +25,11 @@
 
 После запуска откройте ссылку из консоли (обычно `http://localhost:8501`). Остановить приложение можно `Ctrl+C`; если `ollama serve` был запущен скриптом, он завершится автоматом.
 
+## Streamlit Cloud
+- В разделе Secrets скопируйте значения из `.streamlit/secrets.example.toml` (LLM_BACKEND=`"gemini"`, GEMINI_API_KEY=`"AIzaSy..."`, GEMINI_MODEL=`"gemini-1.5-flash"`).
+- Убедитесь, что в `requirements.txt` присутствуют `google-generativeai`, `streamlit`, `langgraph`, `jinja2` (уже включены).
+- После деплоя `agents/_llm.py` автоматически переключится на Gemini, локально оставьте `.env` с `LLM_BACKEND=ollama`.
+
 ### Кастомизация
 - Используйте другую модель: `OLLAMA_MODEL=llama3.1:8b ./scripts/run.sh`.
 - Дополнительные документы для RAG можно указать в UI при запуске кампании.
