@@ -7,7 +7,7 @@ from typing import Any, Dict, Iterable, List, Optional, TypedDict
 from langgraph.graph import END, START, StateGraph
 
 from agents import analyst, copywriter, ideator, manager
-from agents._llm import DEFAULT_MODEL
+from agents._llm import chat
 from memory.rag import init_project
 
 
