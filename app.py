@@ -11,6 +11,7 @@ import streamlit as st
 from agents._llm import DEFAULT_MODEL
 from graph import CampaignState, prepare_initial_state, run_campaign
 from memory import rag
+from agents._llm import DEFAULT_MODEL
 
 # import os
 # os.environ["LLM_BACKEND"] = "gemini"
