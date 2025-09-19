@@ -51,3 +51,6 @@ kill -9 <PID>
 
 ## Пуск 
 streamlit run yourscript.py
+
+
+Хорошая версия
